@@ -1,5 +1,5 @@
-#SUBDIRS = intl po m4 src data
-SUBDIRS = src data
+SUBDIRS = po m4 src data
+#SUBDIRS = po m4 intl src data
 
 ACLOCAL_AMFLAGS = -I m4
 

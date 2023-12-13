@@ -119,6 +119,7 @@ CannaFactory::CannaFactory (const String &lang,
 
 CannaFactory::~CannaFactory ()
 {
+    m_reload_signal_connection.disconnect ();
 }
 
 WideString
@@ -130,7 +131,8 @@ CannaFactory::get_name () const
 WideString
 CannaFactory::get_authors () const
 {
-    return WideString ();
+    return utf8_mbstowcs (
+        _("Copyright (C) 2005 Yuichiro Nakada <yui@po.yui.mine.nu>"));
 }
 
 WideString

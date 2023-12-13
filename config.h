@@ -10,7 +10,7 @@
 /* #undef C_ALLOCA */
 
 /* The gettext domain */
-#define GETTEXT_PACKAGE "scim-canna"
+#define GETTEXT_PACKAGE "scim-whiz"
 
 /* Define to 1 if you have `alloca', as a function or macro. */
 #define HAVE_ALLOCA 1
@@ -208,28 +208,28 @@
 #define LTDL_SHLIB_EXT ".so"
 
 /* Define to the system default library search path. */
-#define LTDL_SYSSEARCHPATH "/lib:/usr/lib:/usr/lib/qt-3.3/lib:/usr/X11R6/lib:/usr/X11R6/lib:/usr/lib/mysql:/usr/lib/wine:/usr/local/PCM/PCM4/Dist/lib"
+#define LTDL_SYSSEARCHPATH "/lib:/usr/lib:/usr/lib/qt-3.3/lib:/usr/X11R6/lib:/usr/local/PCM/PCM4/Dist/lib:/usr/lib/wine"
 
 /* Define if dlsym() requires a leading underscore in symbol names. */
 /* #undef NEED_USCORE */
 
 /* Name of package */
-#define PACKAGE "scim-canna"
+#define PACKAGE "scim-whiz"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "poincare@ikezoe.net"
+#define PACKAGE_BUGREPORT "yui@po.yui.mine.nu"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "scim-canna"
+#define PACKAGE_NAME "scim-whiz"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "scim-canna 0.1.0"
+#define PACKAGE_STRING "scim-whiz 0.0.2"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "scim-canna"
+#define PACKAGE_TARNAME "scim-whiz"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.1.0"
+#define PACKAGE_VERSION "0.0.2"
 
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
@@ -243,7 +243,7 @@
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.1.0"
+#define VERSION "0.0.2"
 
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */

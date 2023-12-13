@@ -1,21 +1,8 @@
-/* -*- Mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-/*
- *  Copyright (C) 2005 Takuro Ashie <ashie@homa.ne.jp>
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2, or (at your option)
- *  any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+//---------------------------------------------------------
+//	Whiz Server (Japanese Input Method Engine)
+//
+//		(C)2003-2005 NAKADA
+//---------------------------------------------------------
 
 #define Uses_SCIM_IMENGINE
 #define Uses_SCIM_CONFIG_BASE
@@ -71,7 +58,7 @@ CannaJRKanji::CannaJRKanji (CannaInstance *ci)
             // error
         }
 
-        jrKanjiControl (0, KC_SETAPPNAME, "scim-canna");
+        jrKanjiControl (0, KC_SETAPPNAME, "scim-whiz");
     }
 
     // initialize canna context
@@ -104,27 +91,33 @@ void CannaJRKanji::install_properties()
 {
 	Property prop;
 	prop = Property (SCIM_PROP_INPUT_MODE,
-			_("Input mode"), String (""), _("Input mode"));
+			_("入力モード"), String (""), _("入力モード"));
+			//_("Input mode"), String (""), _("Input mode"));
 	m_properties.push_back (prop);
 
 	prop = Property (SCIM_PROP_INPUT_MODE_HIRAGANA,
-			_("Hiragana"), String (""), _("Hiragana"));
+			_("ひらがな"), String (""), _("ひらがな"));
+			//_("Hiragana"), String (""), _("Hiragana"));
 	m_properties.push_back (prop);
 
 	prop = Property (SCIM_PROP_INPUT_MODE_KATAKANA,
-			_("Katakana"), String (""), _("Katakana"));
+			_("カタカナ"), String (""), _("カタカナ"));
+			//_("Katakana"), String (""), _("Katakana"));
 	m_properties.push_back (prop);
 
 	prop = Property (SCIM_PROP_INPUT_MODE_HALF_KATAKANA,
-			_("Half width katakana"), String (""), _("Half width katakana"));
+			_("半角ｶﾅ"), String (""), _("半角ｶﾅ"));
+			//_("Half width katakana"), String (""), _("Half width katakana"));
 	m_properties.push_back (prop);
 
 	prop = Property (SCIM_PROP_INPUT_MODE_ALPHABET,
-			_("Alphabet"), String (""), _("Alphabet"));
+			_("英数"), String (""), _("英数"));
+			//_("Alphabet"), String (""), _("Alphabet"));
 	m_properties.push_back (prop);
 
 	prop = Property (SCIM_PROP_INPUT_MODE_WIDE_ALPHABET,
-			_("Wide alphabet"), String (""), _("Wide alphabet"));
+			_("全角英数"), String (""), _("全角英数"));
+			//_("Wide alphabet"), String (""), _("Wide alphabet"));
 	m_properties.push_back (prop);
 
 	/*prop = Property (SCIM_PROP_INPUT_MODE_KIGO,
@@ -145,6 +138,7 @@ CannaJRKanji::translate_key_event (const KeyEvent &key)
 {
     switch (key.code) {
     case SCIM_KEY_Return:
+    case SCIM_KEY_KP_Enter:
         return 0x0d;
 
     case SCIM_KEY_BackSpace:
@@ -193,6 +187,15 @@ CannaJRKanji::translate_key_event (const KeyEvent &key)
 
     case SCIM_KEY_Home:
         return CANNA_KEY_Home;
+
+    case SCIM_KEY_End:
+	return CANNA_KEY_End;
+
+    case SCIM_KEY_Delete:
+	return 0x7f;
+
+    case SCIM_KEY_Tab:
+	return 0x09;
 
     case SCIM_KEY_Help:
     case SCIM_KEY_Escape:

@@ -2,7 +2,7 @@
 
 Summary:	scim-whiz is an SCIM IMEngine module for whiz
 Name:		scim-whiz
-Version:	0.0.1
+Version:	0.0.2
 Release:	%{rel}
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
@@ -40,5 +40,7 @@ make DESTDIR=%{buildroot} install
 
 
 %changelog
+* Fri Sep 16 2005 Yuichiro Nakada <berry@po.yui.mine.nu>
+- Update to scim-canna-0.1.3
 * Fri Jun 10 2005 Yuichiro Nakada <berry@po.yui.mine.nu>
 - Create for Berry Linux

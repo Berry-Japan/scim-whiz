@@ -45,13 +45,13 @@ MSGMERGE = msgmerge
 
 DEFS = -DHAVE_CONFIG_H
 CFLAGS = -g -O2
-CPPFLAGS = 
+CPPFLAGS =
 
 INCLUDES = -I.. -I$(top_srcdir)/intl
 
 COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(XCFLAGS)
 
-SOURCES = 
+SOURCES =
 POFILES = @POFILES@
 GMOFILES = @GMOFILES@
 DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(GETTEXT_PACKAGE).pot \
@@ -85,7 +85,7 @@ INSTOBJEXT = @INSTOBJEXT@
 	  && rm -f $@ && $(GENCAT) $@ $*.msg
 
 
-all: all-@USE_NLS@
+all: all-no
 
 all-yes: $(CATALOGS)
 all-no:
@@ -100,7 +100,7 @@ $(srcdir)/$(GETTEXT_PACKAGE).pot: $(POTFILES)
 
 install: install-exec install-data
 install-exec:
-install-data: install-data-@USE_NLS@
+install-data: install-data-yes
 install-data-no: all
 install-data-yes: all
 	if test -r "$(MKINSTALLDIRS)"; then \

@@ -1,5 +1,5 @@
 #!/bin/sh
-aclocal && autoconf && autoheader && automake -a
+aclocal && autoconf && automake -a && autoheader
 
 # autoscan
 # ./autogen.sh

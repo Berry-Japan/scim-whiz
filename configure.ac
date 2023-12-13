@@ -1,5 +1,7 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(scim-canna, 0.1.0, poincare@ikezoe.net)
+AC_PREREQ(2.59)
+
+AC_INIT(scim-whiz, 0.0.2, yui@po.yui.mine.nu)
 AC_CONFIG_SRCDIR([configure.ac])
 
 # Save this value here, since automake will set cflags and cxxflags later
@@ -7,8 +9,8 @@ cflags_set=${CFLAGS+set}
 cppflags_set=${CPPFLAGS+set}
 
 SCIM_CANNA_MAJOR_VERSION=0
-SCIM_CANNA_MINOR_VERSION=1
-SCIM_CANNA_MICRO_VERSION=0
+SCIM_CANNA_MINOR_VERSION=0
+SCIM_CANNA_MICRO_VERSION=2
 
 SCIM_CANNA_VERSION=$SCIM_CANNA_MAJOR_VERSION.$SCIM_CANNA_MINOR_VERSION.$SCIM_CANNA_MICRO_VERSION
 
@@ -18,14 +20,14 @@ AC_SUBST(SCIM_CANNA_MICRO_VERSION)
 AC_SUBST(SCIM_CANNA_VERSION)
 
 # Init automake stuff
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE(1.9)
 AM_CONFIG_HEADER(config.h)
 
 # Init gettext
 ALL_LINGUAS="ja"
 #AM_GNU_GETTEXT
 
-GETTEXT_PACKAGE=scim-canna
+GETTEXT_PACKAGE=scim-whiz
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain])
 
@@ -119,18 +121,20 @@ fi
 AC_SUBST(SCIM_ICONDIR)
 AC_SUBST(SCIM_MODULEDIR)
 
-#AC_CONFIG_FILES([
-#Makefile
-#intl/Makefile
-#po/Makefile.in
-#m4/Makefile
-#src/Makefile
-#data/Makefile
-#])
+SCIM_CANNA_LOCALEDIR="$datadir/locale"
+AC_SUBST(SCIM_CANNA_LOCALEDIR)
+
 AC_CONFIG_FILES([
 Makefile
+po/Makefile.in
+m4/Makefile
 src/Makefile
 data/Makefile
 ])
+#intl/Makefile
+#],
+#[
+#sed -e "/POTFILES =/r po/POTFILES" -e "s/all: all-@USE_NLS@/all: all-yes/"  #po/Makefile.in > po/Makefile
+#])
 
 AC_OUTPUT
