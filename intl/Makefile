@@ -16,8 +16,8 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 # USA.
 
-PACKAGE = scim-whiz
-VERSION = 0.0.1
+PACKAGE = scim-canna
+VERSION = 0.1.0
 
 SHELL = /bin/sh
 
@@ -39,16 +39,16 @@ subdir = intl
 
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
-MKINSTALLDIRS = $(top_builddir)/./mkinstalldirs
+MKINSTALLDIRS = @MKINSTALLDIRS@
 mkinstalldirs = $(SHELL) $(MKINSTALLDIRS)
 
-l = 
+l = @INTL_LIBTOOL_SUFFIX_PREFIX@
 
 AR = ar
 CC = gcc
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 RANLIB = ranlib
-YACC = : -y -d
+YACC = @INTLBISON@ -y -d
 YFLAGS = --name-prefix=__gettext
 
 DEFS = -DLOCALEDIR=\"$(localedir)\" -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" \
@@ -138,9 +138,9 @@ libgnuintl.h.msvc-static libgnuintl.h.msvc-shared README.woe32 Makefile.msvc
 DISTFILES.obsolete = xopen-msg.sed linux-msg.sed po2tbl.sed.in cat-compat.c \
 COPYING.LIB-2 gettext.h libgettext.h plural-eval.c libgnuintl.h
 
-all: all-no
+all: all-@USE_INCLUDED_LIBINTL@
 all-yes: libintl.$la libintl.h charset.alias ref-add.sed ref-del.sed
-all-no: all-no-no
+all-no: all-no-@BUILD_INCLUDED_LIBINTL@
 all-no-yes: libgnuintl.$la
 all-no-no:
 
@@ -152,7 +152,7 @@ libintl.a libgnuintl.a: $(OBJECTS)
 libintl.la libgnuintl.la: $(OBJECTS)
 	$(LIBTOOL) --mode=link \
 	  $(CC) $(CPPFLAGS) $(CFLAGS) $(XCFLAGS) $(LDFLAGS) -o $@ \
-	  $(OBJECTS)  $(LIBS) -lc \
+	  $(OBJECTS) @LTLIBICONV@ $(LIBS) -lc \
 	  -version-info $(LTV_CURRENT):$(LTV_REVISION):$(LTV_AGE) \
 	  -rpath $(libdir) \
 	  -no-undefined
@@ -224,19 +224,19 @@ intl-compat.lo: $(srcdir)/intl-compat.c
 	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/intl-compat.c
 
 ref-add.sed: $(srcdir)/ref-add.sin
-	sed -e '/^#/d' -e 's/@''PACKAGE''@/scim-whiz/g' $(srcdir)/ref-add.sin > t-ref-add.sed
+	sed -e '/^#/d' -e 's/@''PACKAGE''@/scim-canna/g' $(srcdir)/ref-add.sin > t-ref-add.sed
 	mv t-ref-add.sed ref-add.sed
 ref-del.sed: $(srcdir)/ref-del.sin
-	sed -e '/^#/d' -e 's/@''PACKAGE''@/scim-whiz/g' $(srcdir)/ref-del.sin > t-ref-del.sed
+	sed -e '/^#/d' -e 's/@''PACKAGE''@/scim-canna/g' $(srcdir)/ref-del.sin > t-ref-del.sed
 	mv t-ref-del.sed ref-del.sed
 
 INCLUDES = -I. -I$(srcdir) -I..
 
 libgnuintl.h: $(srcdir)/libgnuintl.h.in
-	sed -e 's,@''HAVE_POSIX_PRINTF''@,1,g' \
-	    -e 's,@''HAVE_ASPRINTF''@,1,g' \
-	    -e 's,@''HAVE_SNPRINTF''@,1,g' \
-	    -e 's,@''HAVE_WPRINTF''@,0,g' \
+	sed -e 's,@''HAVE_POSIX_PRINTF''@,@HAVE_POSIX_PRINTF@,g' \
+	    -e 's,@''HAVE_ASPRINTF''@,@HAVE_ASPRINTF@,g' \
+	    -e 's,@''HAVE_SNPRINTF''@,@HAVE_SNPRINTF@,g' \
+	    -e 's,@''HAVE_WPRINTF''@,@HAVE_WPRINTF@,g' \
 	  < $(srcdir)/libgnuintl.h.in > libgnuintl.h
 
 libintl.h: libgnuintl.h
@@ -256,7 +256,7 @@ check: all
 install: install-exec install-data
 install-exec: all
 	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
-	   && test 'no' = yes; then \
+	   && test '@USE_INCLUDED_LIBINTL@' = yes; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
 	  $(INSTALL_DATA) libintl.h $(DESTDIR)$(includedir)/libintl.h; \
 	  $(LIBTOOL) --mode=install \
@@ -271,7 +271,7 @@ install-exec: all
 	  : ; \
 	fi
 	if test "$(PACKAGE)" = "gettext-tools" \
-	   && test 'no' = no; then \
+	   && test '@USE_INCLUDED_LIBINTL@' = no; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir); \
 	  $(LIBTOOL) --mode=install \
 	    $(INSTALL_DATA) libgnuintl.$la $(DESTDIR)$(libdir)/libgnuintl.$la; \
@@ -282,8 +282,8 @@ install-exec: all
 	else \
 	  : ; \
 	fi
-	if test 'no' = yes; then \
-	  test yes != no || $(mkinstalldirs) $(DESTDIR)$(libdir); \
+	if test '@USE_INCLUDED_LIBINTL@' = yes; then \
+	  test @GLIBC21@ != no || $(mkinstalldirs) $(DESTDIR)$(libdir); \
 	  temp=$(DESTDIR)$(libdir)/t-charset.alias; \
 	  dest=$(DESTDIR)$(libdir)/charset.alias; \
 	  if test -f $(DESTDIR)$(libdir)/charset.alias; then \
@@ -292,7 +292,7 @@ install-exec: all
 	    $(INSTALL_DATA) $$temp $$dest; \
 	    rm -f $$temp; \
 	  else \
-	    if test yes = no; then \
+	    if test @GLIBC21@ = no; then \
 	      orig=charset.alias; \
 	      sed -f ref-add.sed $$orig > $$temp; \
 	      $(INSTALL_DATA) $$temp $$dest; \
@@ -340,19 +340,19 @@ install-strip: install
 
 installdirs:
 	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
-	   && test 'no' = yes; then \
+	   && test '@USE_INCLUDED_LIBINTL@' = yes; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
 	else \
 	  : ; \
 	fi
 	if test "$(PACKAGE)" = "gettext-tools" \
-	   && test 'no' = no; then \
+	   && test '@USE_INCLUDED_LIBINTL@' = no; then \
 	  $(mkinstalldirs) $(DESTDIR)$(libdir); \
 	else \
 	  : ; \
 	fi
-	if test 'no' = yes; then \
-	  test yes != no || $(mkinstalldirs) $(DESTDIR)$(libdir); \
+	if test '@USE_INCLUDED_LIBINTL@' = yes; then \
+	  test @GLIBC21@ != no || $(mkinstalldirs) $(DESTDIR)$(libdir); \
 	  $(mkinstalldirs) $(DESTDIR)$(localedir); \
 	else \
 	  : ; \
@@ -368,7 +368,7 @@ installcheck:
 
 uninstall:
 	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
-	   && test 'no' = yes; then \
+	   && test '@USE_INCLUDED_LIBINTL@' = yes; then \
 	  rm -f $(DESTDIR)$(includedir)/libintl.h; \
 	  $(LIBTOOL) --mode=uninstall \
 	    rm -f $(DESTDIR)$(libdir)/libintl.$la; \
@@ -376,12 +376,12 @@ uninstall:
 	  : ; \
 	fi
 	if test "$(PACKAGE)" = "gettext-tools" \
-	   && test 'no' = no; then \
+	   && test '@USE_INCLUDED_LIBINTL@' = no; then \
 	  rm -f $(DESTDIR)$(libdir)/preloadable_libintl.so; \
 	else \
 	  : ; \
 	fi
-	if test 'no' = yes; then \
+	if test '@USE_INCLUDED_LIBINTL@' = yes; then \
 	  if test -f $(DESTDIR)$(libdir)/charset.alias; then \
 	    temp=$(DESTDIR)$(libdir)/t-charset.alias; \
 	    dest=$(DESTDIR)$(libdir)/charset.alias; \

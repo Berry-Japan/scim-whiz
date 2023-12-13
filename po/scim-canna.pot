@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: ashie@homa.ne.jp\n"
-"POT-Creation-Date: 2005-06-20 15:53+0900\n"
+"POT-Creation-Date: 2005-04-28 19:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,28 +16,52 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/canna_jrkanji.cpp:94
+#: src/canna_jrkanji.cpp:108
 msgid "Input mode"
 msgstr ""
 
-#: src/canna_jrkanji.cpp:98
+#: src/canna_jrkanji.cpp:112
 msgid "Hiragana"
 msgstr ""
 
-#: src/canna_jrkanji.cpp:102
+#: src/canna_jrkanji.cpp:116
 msgid "Katakana"
 msgstr ""
 
-#: src/canna_jrkanji.cpp:106
+#: src/canna_jrkanji.cpp:120
 msgid "Half width katakana"
 msgstr ""
 
-#: src/canna_jrkanji.cpp:110
+#: src/canna_jrkanji.cpp:124
 msgid "Alphabet"
 msgstr ""
 
-#: src/canna_jrkanji.cpp:114
+#: src/canna_jrkanji.cpp:128
 msgid "Wide alphabet"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:132
+msgid "Symbols"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:132
+msgid "Search a symbol"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:136
+msgid "Hex"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:136
+msgid "Search a kanji by hex"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:140
+msgid "Bushu"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:140
+msgid "Search a kanji by bushu"
 msgstr ""
 
 #: src/scim_canna_imengine_setup.cpp:85

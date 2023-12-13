@@ -20,9 +20,9 @@ SOURCES = $(canna_imengine_setup_la_SOURCES) $(canna_la_SOURCES)
 srcdir = .
 top_srcdir = ..
 
-pkgdatadir = $(datadir)/scim-whiz
-pkglibdir = $(libdir)/scim-whiz
-pkgincludedir = $(includedir)/scim-whiz
+pkgdatadir = $(datadir)/scim-canna
+pkglibdir = $(libdir)/scim-canna
+pkgincludedir = $(includedir)/scim-canna
 top_builddir = ..
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -100,10 +100,6 @@ AUTOCONF = ${SHELL} /root/redhat/SOURCES/scim/scim-whiz-0.0.1/missing --run auto
 AUTOHEADER = ${SHELL} /root/redhat/SOURCES/scim/scim-whiz-0.0.1/missing --run autoheader
 AUTOMAKE = ${SHELL} /root/redhat/SOURCES/scim/scim-whiz-0.0.1/missing --run automake-1.9
 AWK = gawk
-BUILD_INCLUDED_LIBINTL = no
-CANNA_CFLAGS = 
-CANNA_LIBS = -lcanna
-CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -116,7 +112,6 @@ CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DATADIRNAME = share
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 ECHO = echo
@@ -127,59 +122,39 @@ EGREP = grep -E
 EXEEXT = 
 F77 = 
 FFLAGS = 
-GENCAT = gencat
-GETTEXT_PACKAGE = scim-whiz
-GLIBC21 = yes
-GMSGFMT = /usr/bin/msgfmt
-HAVE_ASPRINTF = 1
-HAVE_POSIX_PRINTF = 1
-HAVE_SNPRINTF = 1
-HAVE_WPRINTF = 0
+GETTEXT_PACKAGE = scim-canna
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_LTDL_FALSE = 
 INSTALL_LTDL_TRUE = #
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
-INSTOBJEXT = .mo
-INTLBISON = :
-INTLLIBS = 
-INTLOBJS = 
-INTL_LIBTOOL_SUFFIX_PREFIX = 
 LDFLAGS = 
 LIBADD_DL = -ldl
-LIBICONV = 
-LIBINTL = 
 LIBOBJS = 
 LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBTOOL_DEPS = ./ltmain.sh
 LN_S = ln -s
-LTLIBICONV = 
-LTLIBINTL = 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /root/redhat/SOURCES/scim/scim-whiz-0.0.1/missing --run makeinfo
-MKINSTALLDIRS = $(top_builddir)/./mkinstalldirs
-MSGFMT = /usr/bin/msgfmt
-MSGMERGE = /usr/bin/msgmerge
 OBJEXT = o
-PACKAGE = scim-whiz
-PACKAGE_BUGREPORT = yui@po.yui.mine.nu
-PACKAGE_NAME = scim-whiz
-PACKAGE_STRING = scim-whiz 0.0.1
-PACKAGE_TARNAME = scim-whiz
-PACKAGE_VERSION = 0.0.1
+PACKAGE = scim-canna
+PACKAGE_BUGREPORT = poincare@ikezoe.net
+PACKAGE_NAME = scim-canna
+PACKAGE_STRING = scim-canna 0.1.0
+PACKAGE_TARNAME = scim-canna
+PACKAGE_VERSION = 0.1.0
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
-POSUB = po
 RANLIB = ranlib
 SCIM_BUILD_SETUP = 1
 SCIM_BUILD_SETUP_FALSE = #
 SCIM_BUILD_SETUP_TRUE = 
 SCIM_CANNA_MAJOR_VERSION = 0
-SCIM_CANNA_MICRO_VERSION = 1
-SCIM_CANNA_MINOR_VERSION = 0
-SCIM_CANNA_VERSION = 0.0.1
+SCIM_CANNA_MICRO_VERSION = 0
+SCIM_CANNA_MINOR_VERSION = 1
+SCIM_CANNA_VERSION = 0.1.0
 SCIM_CFLAGS = -I/usr/include/scim-1.0  
 SCIM_DEBUG_FLAGS = 
 SCIM_GTKUTILS_CFLAGS = -DXTHREADS -D_REENTRANT -DXUSE_MTSAFE_API -I/usr/include/scim-1.0 -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/X11R6/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/freetype2/config -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include  
@@ -191,10 +166,7 @@ SCIM_VERSION = 0.99.8
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-USE_INCLUDED_LIBINTL = no
-USE_NLS = yes
-VERSION = 0.0.1
-XGETTEXT = /usr/bin/xgettext
+VERSION = 0.1.0
 ac_aux_dir = .
 ac_ct_AR = ar
 ac_ct_CC = gcc
@@ -264,7 +236,7 @@ canna_la_SOURCES = \
 	scim_canna_imengine_factory.cpp \
 	scim_canna_imengine.cpp
 
-canna_la_CFLAGS = -I/usr/include/scim-1.0     
+canna_la_CFLAGS = -I/usr/include/scim-1.0     @CANNA_CFLAGS@
 canna_la_CXXFLAGS = -I/usr/include/scim-1.0   
 canna_la_LDFLAGS = \
 	-avoid-version \
@@ -285,7 +257,7 @@ canna_imengine_setup_la_LDFLAGS = -avoid-version \
                                    -module \
                                    @LIBTOOL_EXPORT_OPTIONS@ \
                                    -Wl,--export-dynamic -lscim-gtkutils-1.0 -lgtk-x11-2.0 -lscim-1.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0   \
-                                    \
+                                   @INTLLIBS@ \
                                    -lscim-1.0  
 
 all: all-am

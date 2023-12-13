@@ -1,5 +1,5 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(scim-whiz, 0.0.1, yui@po.yui.mine.nu)
+AC_INIT(scim-canna, 0.1.0, poincare@ikezoe.net)
 AC_CONFIG_SRCDIR([configure.ac])
 
 # Save this value here, since automake will set cflags and cxxflags later
@@ -7,8 +7,8 @@ cflags_set=${CFLAGS+set}
 cppflags_set=${CPPFLAGS+set}
 
 SCIM_CANNA_MAJOR_VERSION=0
-SCIM_CANNA_MINOR_VERSION=0
-SCIM_CANNA_MICRO_VERSION=1
+SCIM_CANNA_MINOR_VERSION=1
+SCIM_CANNA_MICRO_VERSION=0
 
 SCIM_CANNA_VERSION=$SCIM_CANNA_MAJOR_VERSION.$SCIM_CANNA_MINOR_VERSION.$SCIM_CANNA_MICRO_VERSION
 
@@ -23,9 +23,9 @@ AM_CONFIG_HEADER(config.h)
 
 # Init gettext
 ALL_LINGUAS="ja"
-AM_GNU_GETTEXT
+#AM_GNU_GETTEXT
 
-GETTEXT_PACKAGE=scim-whiz
+GETTEXT_PACKAGE=scim-canna
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain])
 
@@ -76,12 +76,12 @@ AC_CHECK_HEADERS([argz.h fcntl.h float.h inttypes.h langinfo.h libintl.h limits.
 AC_SUBST(ac_aux_dir)
 
 # Checks for Canna Library
-AC_CHECK_HEADER([canna/jrkanji.h], [],
-                [AC_MSG_ERROR(canna/jrkanji.h was not found.)])
-AC_CHECK_LIB([canna], [jrKanjiControl], [CANNA_LIBS="-lcanna"],
-             [AC_MSG_ERROR([Cannot find Canna Library])])
-AC_SUBST(CANNA_LIBS)
-AC_SUBST(CANNA_CFLAGS)
+#AC_CHECK_HEADER([canna/jrkanji.h], [],
+#                [AC_MSG_ERROR(canna/jrkanji.h was not found.)])
+#AC_CHECK_LIB([canna], [jrKanjiControl], [CANNA_LIBS="-lcanna"],
+#             [AC_MSG_ERROR([Cannot find Canna Library])])
+#AC_SUBST(CANNA_LIBS)
+#AC_SUBST(CANNA_CFLAGS)
 
 # libtool option to control which symbols are exported
 # right now, symbols starting with _ are not exported
@@ -119,11 +119,16 @@ fi
 AC_SUBST(SCIM_ICONDIR)
 AC_SUBST(SCIM_MODULEDIR)
 
+#AC_CONFIG_FILES([
+#Makefile
+#intl/Makefile
+#po/Makefile.in
+#m4/Makefile
+#src/Makefile
+#data/Makefile
+#])
 AC_CONFIG_FILES([
 Makefile
-intl/Makefile
-po/Makefile.in
-m4/Makefile
 src/Makefile
 data/Makefile
 ])
