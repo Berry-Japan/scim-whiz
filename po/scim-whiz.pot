@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Takuro Ashie <ashie@homa.ne.jp>
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: ashie@homa.ne.jp\n"
+"POT-Creation-Date: 2005-06-20 15:53+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/canna_jrkanji.cpp:94
+msgid "Input mode"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:98
+msgid "Hiragana"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:102
+msgid "Katakana"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:106
+msgid "Half width katakana"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:110
+msgid "Alphabet"
+msgstr ""
+
+#: src/canna_jrkanji.cpp:114
+msgid "Wide alphabet"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:85
+msgid "Canna"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:90
+msgid "An Canna IMEngine Module."
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:173
+msgid "Specify Canna initialize file"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:182
+msgid "Specify Canna server name"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:198
+msgid "The Canna initialize file name to use."
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:207
+msgid "The Canna host name to connect."
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:288
+msgid "Common keys"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:289
+msgid "Mode keys"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:290
+msgid "Caret keys"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:291
+msgid "Segments keys"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:292
+msgid "Candidates keys"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:293
+msgid "Direct select keys"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:649
+msgid "Search by key"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:653
+msgid "all"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:696
+msgid "Feature"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:705
+msgid "Key bindings"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:711
+msgid "Description"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:740
+msgid "Options"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:747
+msgid "Toolbar"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:753
+msgid "Dictionary"
+msgstr ""
+
+#: src/scim_canna_imengine_setup.cpp:1053
+msgid "Set key filter"
+msgstr ""
