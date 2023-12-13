@@ -1533,7 +1533,7 @@ linux*)
 
   # Append ld.so.conf contents to the search path
   if test -f /etc/ld.so.conf; then
-    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s", \[$]2)); skip = 1; } { if (!skip) print \[$]0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\n' ' '`
+    lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s", \[$]2)); skip = 1; } { if (!skip) print \[$]0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;s/[:,\t]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;/^$/d' | tr '\n' ' '`
     sys_lib_dlsearch_path_spec="/lib${libsuff} /usr/lib${libsuff} $lt_ld_extra"
   fi
 
@@ -1596,11 +1596,7 @@ nto-qnx*)
 openbsd*)
   version_type=sunos
   need_lib_prefix=no
-  # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-  case $host_os in
-    openbsd3.3 | openbsd3.3.*) need_version=yes ;;
-    *)                         need_version=no  ;;
-  esac
+  need_version=no
   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
   finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
   shlibpath_var=LD_LIBRARY_PATH
@@ -3256,12 +3252,12 @@ case $host_os in
 	;;
       pgCC*)
         # Portland Group C++ compiler
-	_LT_AC_TAGVAR(archive_cmds, $1)='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname ${wl}$soname -o $lib'
-  	_LT_AC_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname ${wl}$soname ${wl}-retain-symbols-file ${wl}$export_symbols -o $lib'
+	_LT_AC_TAGVAR(archive_cmds, $1)='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname ${wl}$soname -o $lib'
+  	_LT_AC_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-soname ${wl}$soname ${wl}-retain-symbols-file ${wl}$export_symbols -o $lib'
 
 	_LT_AC_TAGVAR(hardcode_libdir_flag_spec, $1)='${wl}--rpath ${wl}$libdir'
 	_LT_AC_TAGVAR(export_dynamic_flag_spec, $1)='${wl}--export-dynamic'
-	_LT_AC_TAGVAR(whole_archive_flag_spec, $1)='${wl}--whole-archive,`for conv in $convenience\"\"; do test  -n \"$conv\" && new_convenience=\"$new_convenience,$conv\"; done; $echo \"$new_convenience\"` ${wl}--no-whole-archive'
+	_LT_AC_TAGVAR(whole_archive_flag_spec, $1)=''
         ;;
       cxx*)
 	# Compaq C++
@@ -5355,12 +5351,11 @@ EOF
 	tmp_addflag=
 	case $cc_basename,$host_cpu in
 	pgcc*)				# Portland Group C compiler
-	  _LT_AC_TAGVAR(whole_archive_flag_spec, $1)='${wl}--whole-archive,`for conv in $convenience\"\"; do test  -n \"$conv\" && new_convenience=\"$new_convenience,$conv\"; done; $echo \"$new_convenience\"` ${wl}--no-whole-archive'
-	  tmp_addflag=' $pic_flag'
+	  _LT_AC_TAGVAR(whole_archive_flag_spec, $1)=
 	  ;;
 	pgf77* | pgf90* )			# Portland Group f77 and f90 compilers
-	  _LT_AC_TAGVAR(whole_archive_flag_spec, $1)='${wl}--whole-archive,`for conv in $convenience\"\"; do test  -n \"$conv\" && new_convenience=\"$new_convenience,$conv\"; done; $echo \"$new_convenience\"` ${wl}--no-whole-archive'
-	  tmp_addflag=' $pic_flag -Mnomain' ;;
+	  _LT_AC_TAGVAR(whole_archive_flag_spec, $1)=
+	  tmp_addflag=' -fpic -Mnomain' ;;
 	ecc*,ia64* | icc*,ia64*)		# Intel C compiler on ia64
 	  tmp_addflag=' -i_dynamic' ;;
 	efc*,ia64* | ifort*,ia64*)	# Intel Fortran compiler on ia64
@@ -6214,7 +6209,7 @@ fi
 if test "x$with_included_ltdl" = xno; then
   # If the included ltdl is not to be used. then Use the
   # preinstalled libltdl we found.
-  AC_DEFINE([HAVE_LTDL], [1],
+  AC_DEFINE([HAVE_LTDL], 1,
     [Define this if a modern libltdl is already installed])
   LIBLTDL=-lltdl
 fi
@@ -6367,7 +6362,7 @@ module=yes
 eval libltdl_cv_shlibext=$shrext_cmds
   ])
 if test -n "$libltdl_cv_shlibext"; then
-  AC_DEFINE_UNQUOTED([LTDL_SHLIB_EXT], ["$libltdl_cv_shlibext"],
+  AC_DEFINE_UNQUOTED(LTDL_SHLIB_EXT, "$libltdl_cv_shlibext",
     [Define to the extension used for shared libraries, say, ".so".])
 fi
 ])# AC_LTDL_SHLIBEXT
@@ -6380,7 +6375,7 @@ AC_DEFUN([AC_LTDL_SHLIBPATH],
 AC_CACHE_CHECK([which variable specifies run-time library path],
   [libltdl_cv_shlibpath_var], [libltdl_cv_shlibpath_var="$shlibpath_var"])
 if test -n "$libltdl_cv_shlibpath_var"; then
-  AC_DEFINE_UNQUOTED([LTDL_SHLIBPATH_VAR], ["$libltdl_cv_shlibpath_var"],
+  AC_DEFINE_UNQUOTED(LTDL_SHLIBPATH_VAR, "$libltdl_cv_shlibpath_var",
     [Define to the name of the environment variable that determines the dynamic library search path.])
 fi
 ])# AC_LTDL_SHLIBPATH
@@ -6402,7 +6397,7 @@ if test -n "$libltdl_cv_sys_search_path"; then
       sys_search_path="$sys_search_path$PATH_SEPARATOR$dir"
     fi
   done
-  AC_DEFINE_UNQUOTED([LTDL_SYSSEARCHPATH], ["$sys_search_path"],
+  AC_DEFINE_UNQUOTED(LTDL_SYSSEARCHPATH, "$sys_search_path",
     [Define to the system default library search path.])
 fi
 ])# AC_LTDL_SYSSEARCHPATH
@@ -6428,7 +6423,7 @@ AC_DEFUN([AC_LTDL_OBJDIR],
   rmdir .libs 2>/dev/null
   fi
   ])
-AC_DEFINE_UNQUOTED([LTDL_OBJDIR], ["$libltdl_cv_objdir/"],
+AC_DEFINE_UNQUOTED(LTDL_OBJDIR, "$libltdl_cv_objdir/",
   [Define to the sub-directory in which libtool stores uninstalled libraries.])
 ])# AC_LTDL_OBJDIR
 
@@ -6446,7 +6441,7 @@ AC_CACHE_CHECK([whether libtool supports -dlopen/-dlpreopen],
   fi
   ])
 if test x"$libltdl_cv_preloaded_symbols" = xyes; then
-  AC_DEFINE([HAVE_PRELOADED_SYMBOLS], [1],
+  AC_DEFINE(HAVE_PRELOADED_SYMBOLS, 1,
     [Define if libtool can extract symbol lists from object files.])
 fi
 ])# AC_LTDL_DLPREOPEN
@@ -6565,7 +6560,7 @@ if test x"$ac_cv_sys_symbol_underscore" = xyes; then
 fi
 
 if test x"$libltdl_cv_need_uscore" = xyes; then
-  AC_DEFINE([NEED_USCORE], [1],
+  AC_DEFINE(NEED_USCORE, 1,
     [Define if dlsym() requires a leading underscore in symbol names.])
 fi
 ])# AC_LTDL_DLSYM_USCORE
@@ -6586,63 +6581,162 @@ AC_CHECK_TYPES([error_t],
 AC_CHECK_FUNCS([argz_append argz_create_sep argz_insert argz_next argz_stringify])
 ])# AC_LTDL_FUNC_ARGZ
 
+# pkg.m4 - Macros to locate and utilise pkg-config.            -*- Autoconf -*-
+# 
+# Copyright © 2004 Scott James Remnant <scott@netsplit.com>.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+# As a special exception to the GNU General Public License, if you
+# distribute this file as part of a program that contains a
+# configuration script generated by Autoconf, you may include it under
+# the same distribution terms that you use for the rest of that program.
 
-dnl PKG_CHECK_MODULES(GSTUFF, gtk+-2.0 >= 1.3 glib = 1.3.4, action-if, action-not)
-dnl defines GSTUFF_LIBS, GSTUFF_CFLAGS, see pkg-config man page
-dnl also defines GSTUFF_PKG_ERRORS on error
-AC_DEFUN([PKG_CHECK_MODULES], [
-  succeeded=no
+# PKG_PROG_PKG_CONFIG([MIN-VERSION])
+# ----------------------------------
+AC_DEFUN([PKG_PROG_PKG_CONFIG],
+[m4_pattern_forbid([^_?PKG_[A-Z_]+$])
+m4_pattern_allow([^PKG_CONFIG(_PATH)?$])
+AC_ARG_VAR([PKG_CONFIG], [path to pkg-config utility])dnl
+if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
+	AC_PATH_TOOL([PKG_CONFIG], [pkg-config])
+fi
+if test -n "$PKG_CONFIG"; then
+	_pkg_min_version=m4_default([$1], [0.9.0])
+	AC_MSG_CHECKING([pkg-config is at least version $_pkg_min_version])
+	if $PKG_CONFIG --atleast-pkgconfig-version $_pkg_min_version; then
+		AC_MSG_RESULT([yes])
+	else
+		AC_MSG_RESULT([no])
+		PKG_CONFIG=""
+	fi
+		
+fi[]dnl
+])# PKG_PROG_PKG_CONFIG
 
-  if test -z "$PKG_CONFIG"; then
-    AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-  fi
+# PKG_CHECK_EXISTS(MODULES, [ACTION-IF-FOUND], [ACTION-IF-NOT-FOUND])
+#
+# Check to see whether a particular set of modules exists.  Similar
+# to PKG_CHECK_MODULES(), but does not set variables or print errors.
+#
+#
+# Similar to PKG_CHECK_MODULES, make sure that the first instance of
+# this or PKG_CHECK_MODULES is called, or make sure to call
+# PKG_CHECK_EXISTS manually
+# --------------------------------------------------------------
+AC_DEFUN([PKG_CHECK_EXISTS],
+[AC_REQUIRE([PKG_PROG_PKG_CONFIG])dnl
+if test -n "$PKG_CONFIG" && \
+    AC_RUN_LOG([$PKG_CONFIG --exists --print-errors "$1"]); then
+  m4_ifval([$2], [$2], [:])
+m4_ifvaln([$3], [else
+  $3])dnl
+fi])
 
-  if test "$PKG_CONFIG" = "no" ; then
-     echo "*** The pkg-config script could not be found. Make sure it is"
-     echo "*** in your path, or set the PKG_CONFIG environment variable"
-     echo "*** to the full path to pkg-config."
-     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
-  else
-     PKG_CONFIG_MIN_VERSION=0.9.0
-     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
-        AC_MSG_CHECKING(for $2)
 
-        if $PKG_CONFIG --exists "$2" ; then
-            AC_MSG_RESULT(yes)
-            succeeded=yes
+# _PKG_CONFIG([VARIABLE], [COMMAND], [MODULES])
+# ---------------------------------------------
+m4_define([_PKG_CONFIG],
+[if test -n "$PKG_CONFIG"; then
+    if test -n "$$1"; then
+        pkg_cv_[]$1="$$1"
+    else
+        PKG_CHECK_EXISTS([$3],
+                         [pkg_cv_[]$1=`$PKG_CONFIG --[]$2 "$3" 2>/dev/null`],
+			 [pkg_failed=yes])
+    fi
+else
+	pkg_failed=untried
+fi[]dnl
+])# _PKG_CONFIG
 
-            AC_MSG_CHECKING($1_CFLAGS)
-            $1_CFLAGS=`$PKG_CONFIG --cflags "$2"`
-            AC_MSG_RESULT($$1_CFLAGS)
+# _PKG_SHORT_ERRORS_SUPPORTED
+# -----------------------------
+AC_DEFUN([_PKG_SHORT_ERRORS_SUPPORTED],
+[AC_REQUIRE([PKG_PROG_PKG_CONFIG])
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi[]dnl
+])# _PKG_SHORT_ERRORS_SUPPORTED
 
-            AC_MSG_CHECKING($1_LIBS)
-            $1_LIBS=`$PKG_CONFIG --libs "$2"`
-            AC_MSG_RESULT($$1_LIBS)
-        else
-            $1_CFLAGS=""
-            $1_LIBS=""
-            ## If we have a custom action on failure, don't print errors, but 
-            ## do set a variable so people can do so.
-            $1_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "$2"`
-            ifelse([$4], ,echo $$1_PKG_ERRORS,)
+
+# PKG_CHECK_MODULES(VARIABLE-PREFIX, MODULES, [ACTION-IF-FOUND],
+# [ACTION-IF-NOT-FOUND])
+#
+#
+# Note that if there is a possibility the first call to
+# PKG_CHECK_MODULES might not happen, you should be sure to include an
+# explicit call to PKG_PROG_PKG_CONFIG in your configure.ac
+#
+#
+# --------------------------------------------------------------
+AC_DEFUN([PKG_CHECK_MODULES],
+[AC_REQUIRE([PKG_PROG_PKG_CONFIG])dnl
+AC_ARG_VAR([$1][_CFLAGS], [C compiler flags for $1, overriding pkg-config])dnl
+AC_ARG_VAR([$1][_LIBS], [linker flags for $1, overriding pkg-config])dnl
+
+pkg_failed=no
+AC_MSG_CHECKING([for $1])
+
+_PKG_CONFIG([$1][_CFLAGS], [cflags], [$2])
+_PKG_CONFIG([$1][_LIBS], [libs], [$2])
+
+m4_define([_PKG_TEXT], [Alternatively, you may set the environment variables $1[]_CFLAGS
+and $1[]_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.])
+
+if test $pkg_failed = yes; then
+        _PKG_SHORT_ERRORS_SUPPORTED
+        if test $_pkg_short_errors_supported = yes; then
+	        $1[]_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "$2"`
+        else 
+	        $1[]_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "$2"`
         fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$$1[]_PKG_ERRORS" >&AS_MESSAGE_LOG_FD
 
-        AC_SUBST($1_CFLAGS)
-        AC_SUBST($1_LIBS)
-     else
-        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
-        echo "*** See http://www.freedesktop.org/software/pkgconfig"
-     fi
-  fi
+	ifelse([$4], , [AC_MSG_ERROR(dnl
+[Package requirements ($2) were not met:
 
-  if test $succeeded = yes; then
-     ifelse([$3], , :, [$3])
-  else
-     ifelse([$4], , AC_MSG_ERROR([Library requirements ($2) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them.]), [$4])
-  fi
-])
+$$1_PKG_ERRORS
 
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
 
+_PKG_TEXT
+])],
+		[$4])
+elif test $pkg_failed = untried; then
+	ifelse([$4], , [AC_MSG_FAILURE(dnl
+[The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+_PKG_TEXT
+
+To get pkg-config, see <http://www.freedesktop.org/software/pkgconfig>.])],
+		[$4])
+else
+	$1[]_CFLAGS=$pkg_cv_[]$1[]_CFLAGS
+	$1[]_LIBS=$pkg_cv_[]$1[]_LIBS
+        AC_MSG_RESULT([yes])
+	ifelse([$3], , :, [$3])
+fi[]dnl
+])# PKG_CHECK_MODULES
 
 # Copyright (C) 2002, 2003, 2005  Free Software Foundation, Inc.
 #

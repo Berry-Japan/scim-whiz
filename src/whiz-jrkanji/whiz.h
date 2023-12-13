@@ -1,7 +1,7 @@
 //---------------------------------------------------------
 //	Whiz (Japanese Input Method Engine)
 //
-//		(C)2003-2005 NAKADA
+//		(C)2003-2006 NAKADA
 //---------------------------------------------------------
 
 #ifndef __whiz_conf__
@@ -9,8 +9,8 @@
 
 
 // Version
-#define WHIZ_VER	"0.49"				// Version
-#define WHIZ_CODE	"Monoceros"			// Code Name
+#define WHIZ_VER	"0.52"				// Version
+#define WHIZ_CODE	"Indus"				// Code Name
 
 // Directories
 #define WHIZ_DIR	"/opt/whiz"			// Install dir

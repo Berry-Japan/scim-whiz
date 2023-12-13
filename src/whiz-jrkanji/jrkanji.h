@@ -1,14 +1,14 @@
 //---------------------------------------------------------
 //	Whiz Server (Japanese Input Method Engine)
 //
-//		(C)2003-2005 NAKADA
+//		(C)2003-2006 NAKADA
 //---------------------------------------------------------
 
 /* どのような情報があるかを示すフラグ */
-#define KanjiModeInfo   	0x1
-#define KanjiGLineInfo  	0x2
+#define KanjiModeInfo   	0x1	// 変換モード変更
+#define KanjiGLineInfo  	0x2	// 候補を表示
 #define KanjiYomiInfo		0x4
-#define KanjiThroughInfo	0x8
+#define KanjiThroughInfo	0x8	// そのまま表示
 #define KanjiEmptyInfo		0x10
 
 #define KanjiExtendInfo		0x20
@@ -61,6 +61,7 @@
 #define KC_QUERYCUSTOM          37
 #define KC_CLOSEALLCONTEXT      38
 #define KC_ATTRIBUTEINFO	39
+#define KC_CHANGERULE		40
 
 typedef struct {
 	unsigned char *echoStr;	/* local echo string */
@@ -70,8 +71,8 @@ typedef struct {
 	unsigned long info;	/* その他の情報 */
 	unsigned char *mode;	/* モード情報 */
 	struct {
-		unsigned char *line;
-		int length;
+		unsigned char *line;	// 候補リスト
+		int length;		// 候補リストの長さ
 		int revPos;
 		int revLen;
 	} gline;		/* 一覧表示のための情報 */
@@ -84,7 +85,7 @@ typedef struct {
 	jrKanjiStatus *ks;
 } jrKanjiStatusWithValue;
 
-int jrKanjiString(const int, const int, char *, const int, jrKanjiStatus *);
+int jrKanjiString(const int, int, char *, const int, jrKanjiStatus *);
 int jrKanjiControl(const int, const int, char *);
 
 
